@@ -10,3 +10,5 @@ figure('Units','normalized','Position',[0.1 0.1 0.8 0.8]);
 plot(lgraph);
 
 A = net.Layers(2,1).Weights;
+s1 = size(A, 1);
+s2 = size(
