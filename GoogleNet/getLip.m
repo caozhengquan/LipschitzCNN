@@ -33,7 +33,12 @@
 
 load('gNet.mat');
 LL = [];
+
+ii = 0;
+
 for t = 4:5:44
+ii = ii + 1;
+disp(['The ', num2str(ii), '-th iteration.']);
 
 ind_start = t; % where 1-by-1 is
 W0 = gNet{ind_start, 3};
