@@ -36,7 +36,7 @@ LL = [];
 
 ii = 0;
 
-for t = 4:5:44
+for t = 34:5:44
 ii = ii + 1;
 disp(['The ', num2str(ii), '-th iteration.']);
 

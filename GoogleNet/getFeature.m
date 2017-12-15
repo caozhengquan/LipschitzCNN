@@ -1,7 +1,15 @@
 % Install and compile MatConvNet (needed once).
 untar('http://www.vlfeat.org/matconvnet/download/matconvnet-1.0-beta25.tar.gz') ;
 cd matconvnet-1.0-beta25
-run matlab/vl_compilenn ;
+cd matlab
+vl_compilenn('enableGpu', true, ...
+    'cudaRoot', 'C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v8.0', ...
+    'cudaMethod', 'nvcc', ...
+    'enableCudnn', true, ...
+    'cudnnRoot', 'C:/Cudnn/cudnn-8.0-windows10-x64-v6.0/cuda', ...
+    'EnableImreadJpeg',false) ;
+cd ..
+
 
 % setup MatConvNet
 run  matlab/vl_setupnn
