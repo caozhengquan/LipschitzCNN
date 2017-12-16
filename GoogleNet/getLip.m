@@ -76,32 +76,36 @@ ND = ceil(N/Delta);
 % ND = ceil(N/Delta);
 
 
-M = zeros(ND, ND, D, C*Delta*Delta);
+% M = zeros(ND, ND, D, C*Delta*Delta);
+% 
+% for d = 1:D
+%     for c = 1:C
+%         A = W(:,:,c,d);
+%         Af = fft2(A, ND*Delta, ND*Delta);
+%         for j = 1:ND
+%             for k = 1:ND
+%                 temp = [];
+%                 for l1 = 0:Delta-1
+%                     for l2 = 0:Delta-1
+%                         temp = [temp, Af(j+l1*ND, k+l2*ND)];
+%                     end
+%                 end
+%                 M(j, k, d, (c-1)*Delta*Delta+1:c*Delta*Delta) = ...
+%                     temp/Delta/Delta;
+%             end
+%         end
+%     end
+% end
 
-for d = 1:D
-    for c = 1:C
-        A = W(:,:,c,d);
-        Af = fft2(A, ND*Delta, ND*Delta);
-        for j = 1:ND
-            for k = 1:ND
-                temp = [];
-                for l1 = 0:Delta-1
-                    for l2 = 0:Delta-1
-                        temp = [temp, Af(j+l1*ND, k+l2*ND)];
-                    end
-                end
-                M(j, k, d, (c-1)*Delta*Delta+1:c*Delta*Delta) = ...
-                    temp/Delta/Delta;
-            end
-        end
-    end
-end
+Wf = fft2(W, ND*Delta, ND*Delta);
+M = reshape(Wf, [ND, ND, C*Delta*Delta, D]);
+
 
 Mnorm = zeros(ND);
 for j = 1:ND
     for k = 1:ND
         temp = M(j,k,:,:);
-        temp = reshape(temp, D, C*Delta*Delta);
+        temp = reshape(temp, C*Delta*Delta, D);
         Mnorm(j,k) = norm(temp);
     end
 end
